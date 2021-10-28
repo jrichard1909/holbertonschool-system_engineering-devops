@@ -2,6 +2,5 @@
 # This script for ls
 for i in *
 do
-	IFS="-" read -ra ADDR <<< "$i"
-	echo "${ADDR[1]}"
+	echo "$i" | cut -d - -f2
 done
