@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#use until in bash script
+
+cont=1
+end=10
+
+until [ $end -lt $cont ]
+do
+	echo "Best School"
+	(( cont++))
+done
