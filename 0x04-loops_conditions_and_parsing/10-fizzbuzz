@@ -4,15 +4,15 @@ i="1"
 
 while [ $i -le 100 ]
 do
-	if ! (( i % 3 ))
+	if ! (( i % 15 ))
+	then
+		echo "FizzBuzz"
+	elif ! (( i % 3 ))
 	then
 		echo "Fizz"
 	elif ! (( i % 5 ))
 	then
 		echo "Buzz"
-	elif ! (( i % 15 ))
-	then
-		echo "FizzBuzz"
 	else
 		echo "$i"
 	fi
