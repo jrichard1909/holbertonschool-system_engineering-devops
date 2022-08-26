@@ -9,5 +9,5 @@ echo "Hello World" | sudo tee /var/www/html/index.nginx-debian.html
 sudo sed -i '0,/location \/ {/s//location \/redirect_me {\n\t\treturn 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;/' /etc/nginx/sites-available/default
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/xyzfoo.html
 sudo sed -i "$ERROR404" $SED_PATH
-sudo sed -i "s/listen [::]:80 default_server;/$new_string2/" $SED_PATH
+sudo sed -i "s/listen [::]:80 default_server;/$HTTP_HEADER/" $SED_PATH
 sudo service nginx start
