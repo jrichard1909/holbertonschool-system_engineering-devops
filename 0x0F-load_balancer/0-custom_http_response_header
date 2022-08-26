@@ -2,12 +2,12 @@
 # Bash script that configures a new Ubuntu machine to respect above requirements.
 SED_PATH='/etc/nginx/sites-available/default'
 ERROR404="0,/server_name _;/s//server_name _;\n\n\terror_page 404 \/xyzfoo.html;\n\tlocation \/xyzfoo.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}/"
-HTTP_HEADER="http {\\n\\tadd_header X-Served-By \"$HOSTNAME\";"
+HTTP_HEADER="listen [::]:80 default_server;\n\tadd_header X-Served-By \"$HOSTNAME\";"
 sudo apt-get -y update
 sudo apt-get -y install nginx
 echo "Hello World" | sudo tee /var/www/html/index.nginx-debian.html
 sudo sed -i '0,/location \/ {/s//location \/redirect_me {\n\t\treturn 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;/' /etc/nginx/sites-available/default
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/xyzfoo.html
 sudo sed -i "$ERROR404" $SED_PATH
-sudo sed -i "s/http {/$new_string2/" /etc/nginx/nginx.conf
+sudo sed -i "s/listen [::]:80 default_server;/$new_string2/" $SED_PATH
 sudo service nginx start
