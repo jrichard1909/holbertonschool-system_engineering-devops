@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Bash script with the minimum number of commands to automate your fix.
+sudo rm -f /etc/nginx/sites-enabled/default
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled
+sudo service nginx stop
+sudo service nginx start
