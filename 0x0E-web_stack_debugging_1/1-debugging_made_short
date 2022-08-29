@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Bash script with the minimum number of commands to automate your fix.
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled
+sudo service nginx start
+sudo rm /run/nginx.pid
