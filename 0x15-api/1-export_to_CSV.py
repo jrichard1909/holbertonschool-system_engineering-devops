@@ -25,9 +25,7 @@ if __name__ == "__main__":
         if len(todo) > 0:
             for task in todo:
                 if task['userId'] == userid:
-                    if totalTask > 0:
-                        data.append([str(task['userId']), name, str(task['completed']), task['title']])
-                    totalTask += 1
+                    data.append([str(task['userId']), name, str(task['completed']), task['title']])
         else:
             print("Not result")
     except ValueError:
