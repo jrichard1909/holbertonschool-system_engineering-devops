@@ -10,7 +10,7 @@ if __name__ == "__main__":
 
     if len(sys.argv) > 1:
         userid = int(sys.argv[1])
-    
+
     totalTask = 0
     completeTask = 0
     titleTask = ''
@@ -28,23 +28,23 @@ if __name__ == "__main__":
     except ValueError:
         print("Not a valid JSON")
 
-
     r = requests.get('https://jsonplaceholder.typicode.com/todos')
     try:
         todo = r.json()
         if len(todo) > 0:
             for task in todo:
                 if task['userId'] == userid:
-                    if task['completed'] == True:
+                    if task['completed'] is True:
                         if completeTask > 0:
                             titleTask += '\n'
                         completeTask += 1
-                        titleTask = titleTask + '\t' + task['title']
+                        titleTask = titleTask + '\t' + ' ' + task['title']
                     totalTask += 1
         else:
             print("Not result")
     except ValueError:
         print("Not a valid JSON")
 
-    print('Employee {} is done with tasks({}/{}):'.format(name, completeTask, totalTask))
+    print('Employee {} is done with tasks({}/{}):'
+          .format(name, completeTask, totalTask))
     print(titleTask)
