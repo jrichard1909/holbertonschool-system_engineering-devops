@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""Python script to export data in the CSV format"""
+"""Python script to export data in the JSON format"""
 
-import csv
+import json
 import requests
 import sys
 
@@ -11,7 +11,7 @@ base_url = 'https://jsonplaceholder.typicode.com/'
 def do_request():
     '''Performs request'''
 
-    if not len(sys.argv):
+    if len(sys.argv) < 2:
         return print('USAGE:', __file__, '<employee id>')
     eid = sys.argv[1]
     try:
@@ -34,13 +34,13 @@ def do_request():
                   if todo.get('userId') == user.get('id')]
     completed = [todo for todo in user_todos if todo.get('completed')]
 
-    with open(eid + '.csv', 'w') as csvfile:
-        writer = csv.writer(csvfile, lineterminator='\n',
-                            quoting=csv.QUOTE_ALL)
-        [writer.writerow(['{}'.format(field) for field in
-                          (todo.get('userId'), user.get('username'),
-                           todo.get('completed'), todo.get('title'))])
-         for todo in user_todos]
+    user_todos = [{'task': todo.get('title'),
+                   'completed': todo.get('completed'),
+                   'username': user.get('username')}
+                  for todo in user_todos]
+    data = {eid: user_todos}
+    with open(eid + '.json', 'w') as file:
+        json.dump(data, file)
 
 
 if __name__ == '__main__':
